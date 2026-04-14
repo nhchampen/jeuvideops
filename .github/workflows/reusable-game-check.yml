@@ -1,0 +1,41 @@
+name: Reusable Game Check
+
+# Allowed to be call by an other workflow
+on:
+  worflow_call:
+    inputs:
+      game-path:
+        required: true
+        type: string
+        description: './games/*'
+
+jobs:
+  check:
+    name: Lint, test & Audit
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ inputs.game-path }} # All the commands exec in that directory
+  
+  steps:
+    - name: Checkout repository
+      uses: actions/setup-node@v4
+      with: 
+        node-version: '20'
+        cache: 'npm'
+        cache-dependency-path: ${{ inputs.game-path }}/package-lock.json
+
+    - name: Install dependencies
+      run: npm ci
+
+    # Placeholder for futurs steps
+    # Changes echo with the real commands
+    - name: Unit Tests
+      run: echo "TODO:\ npm test"
+
+    - name: Functional Tests
+      run: echo "TODO:\ npm run test:functional"
+    
+    - name: Security Audit (npm audit)
+      run: echo "TODO:\ npm audit --audit-level=moderate"
+
