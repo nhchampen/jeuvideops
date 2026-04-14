@@ -1,0 +1,32 @@
+name: Secret Scanning with Gitleaks
+
+# Trigger when :
+# - Manualy with Github Interface
+# - On push (every branches)
+# - On pull_request to main branch
+
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  gitleaks-scan:
+    name: Gitleaks Secret Scan
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Code Checkout with the whole log
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Clone the whole historic to scan previous commits
+      
+      # 2. Run Gitleaks scan
+      - name: Run Gitleaks
+        id: gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
