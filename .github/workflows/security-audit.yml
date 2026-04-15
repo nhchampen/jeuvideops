@@ -1,0 +1,37 @@
+name: Security Audit
+
+on:
+  push:
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  security-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run npm audit
+        run: npm audit --json > audit-report.json
+
+      - name: Upload audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: npm-audit-report-root
+          path: audit-report.json
+          retention-days: 7
+
+      - name: Check severity thresholds
+        env:
+          FAIL_ON_SEVERITY: ${{ vars.FAIL_ON_SEVERITY || 'high' }}
+        run: node scripts/check-audit.js

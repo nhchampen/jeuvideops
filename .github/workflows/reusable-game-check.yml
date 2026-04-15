@@ -1,22 +1,15 @@
 name: Reusable Game Check
 
-# Allowed to be call by an other workflow
 on:
   workflow_call:
     inputs:
       game-path:
         required: true
         type: string
-        description: './games/*'
 
 jobs:
-  check:
-    name: Lint, test & Audit
+  lint-test-audit:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ${{ inputs.game-path }} # All the commands exec in that directory
-  
     steps:
       # Step 1 : Get source code
       - name: Checkout repository
@@ -25,7 +18,7 @@ jobs:
       # Step 2 : Install Node.js (with cache if allowed)
       - name: Setup Node.js
         uses: actions/setup-node@v4
-        with: 
+        with:
           node-version: '20'
           cache: 'npm'
           cache-dependency-path: ${{ inputs.game-path }}/package-lock.json
@@ -46,9 +39,14 @@ jobs:
       - name: Unit Tests
         run: echo "TODO:\ npm test"
 
-      - name: Functional Tests
-        run: echo "TODO:\ npm run test:functional"
-      
-      - name: Security Audit (npm audit)
-        run: echo "TODO:\ npm audit --audit-level=moderate"
+      - name: Run npm audit
+        run: |
+          cd ${{ inputs.game-path }}
+          npm audit --json > audit-report.json || true
 
+      - name: Upload audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-report-${{ steps.safe-name.outputs.safe_name }}
+          path: ${{ inputs.game-path }}/audit-report.json
+          retention-days: 7
