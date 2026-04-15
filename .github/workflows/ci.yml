@@ -12,7 +12,7 @@ jobs:
     name: Test Two Ships
     uses: ./.github/workflows/reusable-game-check.yml
     with:
-      game-path: games/two-shops-passing-in-the-night
+      game-path: games/two-ships-passing-in-the-night
 
   # Job 2 : Test for the game space word
   test-space-word:
