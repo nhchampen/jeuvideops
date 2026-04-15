@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     uses: ./.github/workflows/reusable-game-check.yml
     with:
-      game-path: games/two-shops-passing-in-the-night
+      game-path: ./games/two-shops-passing-in-the-night
 
   # Job 2 : Test for the game space word
   test-space-word:
@@ -21,4 +21,4 @@ jobs:
     runs-on: ubuntu-latest
     uses: ./.github/workflows/reusable-game-check.yml
     with:
-      game-path: games/spaceword
+      game-path: ./games/spaceword
