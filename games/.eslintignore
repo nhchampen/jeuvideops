@@ -1,1 +1,2 @@
 echo "games/" > .eslintignore
+echo "!.*" >> .eslintignore
