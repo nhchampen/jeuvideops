@@ -1,0 +1,34 @@
+name: Lint Code
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - run: npm ci
+      
+      - name: Run ESLint
+        id: lint
+        continue-on-error: true
+        run: npx eslint . --format json --output-file eslint_report.json
+      
+      - name: Annotate Results
+        uses: ataylorme/eslint-annotate-action@v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          report-json: "eslint_report.json"
+          
+      - name: Fail build on errors
+        run: |
+          if [ ${{ steps.lint.outcome }} != 'success' ]; then
+            exit 1
+          fi

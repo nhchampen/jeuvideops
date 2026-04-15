@@ -1,0 +1,23 @@
+{
+  "name": "jeuvideops",
+  "version": "1.0.0",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-prettier": "^5.5.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nhchampen/jeuvideops.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nhchampen/jeuvideops/issues"
+  },
+  "homepage": "https://github.com/nhchampen/jeuvideops#readme"
+}
