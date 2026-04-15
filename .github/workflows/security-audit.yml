@@ -1,0 +1,55 @@
+name: Security Audit
+
+on:
+  push:
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 1'  # Runs every Monday at midnight
+
+jobs:
+  security-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run npm audit and generate report
+        run: npm audit --json > audit-report.json
+
+      - name: Upload audit report as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: npm-audit-report
+          path: audit-report.json
+          retention-days: 7
+
+      - name: Generate human-readable report
+        run: |
+          echo "# npm Audit Report" > audit-summary.md
+          echo "" >> audit-summary.md
+          echo '```' >> audit-summary.md
+          npm audit >> audit-summary.md 2>&1
+          echo '```' >> audit-summary.md
+
+      - name: Upload summary report
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-summary
+          path: audit-summary.md
+          retention-days: 7
+
+      - name: Check severity thresholds
+        env:
+          FAIL_ON_SEVERITY: ${{ vars.FAIL_ON_SEVERITY || 'high' }}
+        run: node scripts/check-audit.js
