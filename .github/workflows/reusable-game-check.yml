@@ -44,9 +44,18 @@ jobs:
           cd ${{ inputs.game-path }}
           npm audit --json > audit-report.json || true
 
+      - name: Generate safe artifact name
+        id: artifact-name
+        run: |
+          # Extraire le dernier segment du chemin (nom du dossier du jeu)
+          GAME_NAME=$(basename "${{ inputs.game-path }}")
+          # Remplacer les caractères problématiques (optionnel, ici juste pour l'exemple)
+          SAFE_NAME=$(echo "$GAME_NAME" | sed 's/[^a-zA-Z0-9-]/-/g')
+          echo "safe_name=$SAFE_NAME" >> $GITHUB_OUTPUT
+
       - name: Upload audit report
         uses: actions/upload-artifact@v4
         with:
-          name: audit-report-${{ replace(inputs.game-path, '/', '-') }}-${{ github.run_id }}
+          name: audit-report-${{ steps.artifact-name.outputs.safe_name }}-${{ github.run_id }}
           path: ${{ inputs.game-path }}/audit-report.json
           retention-days: 7
