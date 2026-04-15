@@ -2,7 +2,7 @@ name: Reusable Game Check
 
 # Allowed to be call by an other workflow
 on:
-  worflow_call:
+  workflow_call:
     inputs:
       game-path:
         required: true
