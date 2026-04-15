@@ -21,13 +21,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run npm audit and generate report
+      - name: Run npm audit
         run: npm audit --json > audit-report.json
 
-      - name: Upload audit report as artifact
+      - name: Upload audit report
         uses: actions/upload-artifact@v4
         with:
-          name: npm-audit-report
+          name: npm-audit-report-root
           path: audit-report.json
           retention-days: 7
 
