@@ -11,7 +11,7 @@ jobs:
   test-two-ships:
     name: Test Two Ships
     runs-on: ubuntu-latest
-    uses: ./reusable-game-check.yml
+    uses: ./.github/workflows/reusable-game-check.yml
     with:
       game-path: games/two-shops-passing-in-the-night
 
