@@ -10,13 +10,13 @@ jobs:
   # Job 1 : Test for the game Two Ships
   test-two-ships:
     name: Test Two Ships
-    uses: ./github/worflows/reusable-game-check.yml
+    uses: ./github/workflows/reusable-game-check.yml
     with:
-      games-path: games/two-shops-passing-in-the-night
+      game-path: games/two-shops-passing-in-the-night
   
   # Job 2 : Test for the game space word
   test-space-word:
     name: Test Space word
-    uses: ./.github/worflows/reusable-game-check.yml
+    uses: ./.github/workflows/reusable-game-check.yml
     with:
       game-path: games/spaceword
