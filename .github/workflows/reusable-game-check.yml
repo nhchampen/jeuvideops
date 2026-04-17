@@ -47,9 +47,9 @@ jobs:
       - name: Generate safe artifact name
         id: artifact-name
         run: |
-          # Extraire le dernier segment du chemin (nom du dossier du jeu)
+          # Extract the last segment of the path (name of the directory game)
           GAME_NAME=$(basename "${{ inputs.game-path }}")
-          # Remplacer les caractères problématiques (optionnel, ici juste pour l'exemple)
+          # Replace untrusty char 
           SAFE_NAME=$(echo "$GAME_NAME" | sed 's/[^a-zA-Z0-9-]/-/g')
           echo "safe_name=$SAFE_NAME" >> $GITHUB_OUTPUT
 
