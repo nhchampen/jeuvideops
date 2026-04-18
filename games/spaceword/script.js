@@ -9,8 +9,8 @@ let context;
 let secondsPassed = 0;
 let oldTimeStamp = 0;
 let gameObjects;
-let mouseX;
-let mouseY;
+let mouseX = 400;
+let mouseY = 300;
 let words = [];
 let word = '';
 let elapsedTime = 0;
@@ -26,6 +26,7 @@ let isGameBegins = false;
 let reverse = false;
 let pintinhaColor1 = 'white';
 let pintinhaColor = 'black';
+
 
 // === Expose game state for testing (with getters AND setters) ===
 if (typeof window !== 'undefined') {
@@ -515,8 +516,8 @@ window.gameActions = {
         pintinhaColor1 = 'white';
         pintinhaColor = 'black';
         timer = '';
-        mouseX = 0;
-        mouseY = 0;
+        mouseX = 400;
+        mouseY = 300;
         // Nettoyer les éventuels écouteurs résiduels (optionnel)
     }
 };
