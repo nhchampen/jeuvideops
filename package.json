@@ -3,20 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "lint": "eslint .",
-    "test": "jest --ci --reporters=default --reporters=jest-junit"
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "reporters": [
-      "default",
-      [
-        "jest-junit",
-        {
-          "outputDirectory": "test-results",
-          "outputName": "junit.xml"
-        }
-      ]
-    ]
+    "test": "jest"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",

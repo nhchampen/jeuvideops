@@ -14,8 +14,8 @@ module.exports = {
     reporters: [
         'default',
         ['jest-junit', {
-        outputDirectory: '<rootDir>/test-results',
-        outputName: 'junit.xml'
+            outputDirectory: '<rootDir>/test-results',
+            outputName: 'junit.xml'
         }]
     ]
 };
