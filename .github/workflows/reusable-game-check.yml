@@ -11,51 +11,90 @@ jobs:
   lint-test-audit:
     runs-on: ubuntu-latest
     steps:
-      # Step 1 : Get source code
+      # Step 1: Checkout the source code
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2 : Install Node.js (with cache if allowed)
-      - name: Setup Node.js
+      # Step 2: Determine if a package-lock.json exists in the game folder
+      - name: Check for package-lock.json
+        id: check_lock
+        run: |
+          if [ -f "${{ inputs.game-path }}/package-lock.json" ]; then
+            echo "has_lock=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_lock=false" >> $GITHUB_OUTPUT
+          fi
+
+      # Step 3a: Setup Node.js WITH cache (only if lock file exists)
+      - name: Setup Node.js (with cache)
+        if: steps.check_lock.outputs.has_lock == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
           cache-dependency-path: ${{ inputs.game-path }}/package-lock.json
-        continue-on-error: true # Doesn't block if cached failed
 
-      # Step 3 : Install dependencies (if package.json available)
-      - name: Install dependencies
+      # Step 3b: Setup Node.js WITHOUT cache (if no lock file)
+      - name: Setup Node.js (without cache)
+        if: steps.check_lock.outputs.has_lock == 'false'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Step 4: Install root dependencies (Jest, Babel, etc. are centralized)
+      - name: Install root dependencies
         run: |
           if [ -f "package.json" ]; then
-            echo "Installing dependencies..."
-            npm install
+            if [ -f "package-lock.json" ]; then
+              npm ci
+            else
+              npm install
+            fi
           else
-            echo "No package.json found, skipping npm install"
+            echo "No root package.json, skipping"
           fi
 
-      # Placeholder for futurs steps
-      # Changes echo with the real commands
-      - name: Unit Tests
-        run: npm test -- --testPathPatterns=utils.test.js
-
-      - name: Functionnal Tests
-        run: npm test -- --testPathPatterns=functional.test.js
-
-      - name: Run npm audit
+      # Step 5: Install game-specific dependencies (if any)
+      - name: Install game dependencies
+        working-directory: ${{ inputs.game-path }}
         run: |
-          cd ${{ inputs.game-path }}
-          npm audit --json > audit-report.json || true
+          if [ -f "package.json" ]; then
+            if [ -f "package-lock.json" ]; then
+              npm ci
+            else
+              npm install
+            fi
+          else
+            echo "No game package.json, skipping"
+          fi
 
+      # Step 6: Run unit tests (using the Jest project configuration)
+      - name: Unit Tests
+        run: npx jest --projects ${{ inputs.game-path }} --testPathPattern="utils.test.js" --ci
+
+      # Step 7: Run functional tests
+      - name: Functional Tests
+        run: npx jest --projects ${{ inputs.game-path }} --testPathPattern="functional.test.js" --ci
+
+      # Step 8: Run npm audit inside the game folder (informative only)
+      - name: Run npm audit
+        working-directory: ${{ inputs.game-path }}
+        run: |
+          if [ -f "package.json" ]; then
+            npm audit --json > audit-report.json || true
+          else
+            echo "{}" > audit-report.json
+          fi
+
+      # Step 9: Generate a safe artifact name from the game folder name
       - name: Generate safe artifact name
         id: artifact-name
         run: |
-          # Extract the last segment of the path (name of the directory game)
           GAME_NAME=$(basename "${{ inputs.game-path }}")
-          # Replace untrusty char 
           SAFE_NAME=$(echo "$GAME_NAME" | sed 's/[^a-zA-Z0-9-]/-/g')
           echo "safe_name=$SAFE_NAME" >> $GITHUB_OUTPUT
 
+      # Step 10: Upload the audit report as a build artifact
       - name: Upload audit report
         uses: actions/upload-artifact@v4
         with:
