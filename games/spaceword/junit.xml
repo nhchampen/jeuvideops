@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="15" failures="0" errors="0" time="0.55">
+  <testsuite name="SpaceWord Utilities" errors="0" failures="0" skipped="0" timestamp="2026-04-17T09:57:23" time="0.316" tests="15">
+    <testcase classname="SpaceWord Utilities getRandomInt returns an integer between the bounds" name="SpaceWord Utilities getRandomInt returns an integer between the bounds" time="0.002">
+    </testcase>
+    <testcase classname="SpaceWord Utilities getRandomInt equal bounds returns that value" name="SpaceWord Utilities getRandomInt equal bounds returns that value" time="0">
+    </testcase>
+    <testcase classname="SpaceWord Utilities rectIntersect non-overlapping returns false" name="SpaceWord Utilities rectIntersect non-overlapping returns false" time="0">
+    </testcase>
+    <testcase classname="SpaceWord Utilities rectIntersect overlapping returns true" name="SpaceWord Utilities rectIntersect overlapping returns true" time="0">
+    </testcase>
+    <testcase classname="SpaceWord Utilities rectIntersect rectangles touching edges collide" name="SpaceWord Utilities rectIntersect rectangles touching edges collide" time="0.001">
+    </testcase>
+    <testcase classname="SpaceWord Utilities circleIntersect non-overlapping circles return false" name="SpaceWord Utilities circleIntersect non-overlapping circles return false" time="0">
+    </testcase>
+    <testcase classname="SpaceWord Utilities circleIntersect overlapping circles return true" name="SpaceWord Utilities circleIntersect overlapping circles return true" time="0">
+    </testcase>
+    <testcase classname="SpaceWord Utilities circleIntersect tangent circles return true" name="SpaceWord Utilities circleIntersect tangent circles return true" time="0">
+    </testcase>
+    <testcase classname="SpaceWord Utilities timeToString 123456789 ms formats correctly (as per PDF expectation)" name="SpaceWord Utilities timeToString 123456789 ms formats correctly (as per PDF expectation)" time="0">
+    </testcase>
+    <testcase classname="SpaceWord Utilities timeToString non-numeric input returns NaN string" name="SpaceWord Utilities timeToString non-numeric input returns NaN string" time="0">
+    </testcase>
+    <testcase classname="SpaceWord Utilities timeToString zero formats as 00:00:00" name="SpaceWord Utilities timeToString zero formats as 00:00:00" time="0">
+    </testcase>
+    <testcase classname="SpaceWord Utilities timeToString negative value formats with negative components" name="SpaceWord Utilities timeToString negative value formats with negative components" time="0">
+    </testcase>
+    <testcase classname="SpaceWord Utilities generateString returns string of correct length" name="SpaceWord Utilities generateString returns string of correct length" time="0.001">
+    </testcase>
+    <testcase classname="SpaceWord Utilities generateString contains only lowercase letters" name="SpaceWord Utilities generateString contains only lowercase letters" time="0">
+    </testcase>
+    <testcase classname="SpaceWord Utilities getPosition calculates absolute position of an element" name="SpaceWord Utilities getPosition calculates absolute position of an element" time="0.005">
+    </testcase>
+  </testsuite>
+</testsuites>

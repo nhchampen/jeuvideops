@@ -37,7 +37,10 @@ jobs:
       # Placeholder for futurs steps
       # Changes echo with the real commands
       - name: Unit Tests
-        run: echo "TODO:\ npm test"
+        run: npm test -- --testPathPatterns=utils.test.js
+
+      - name: Functionnal Tests
+        run: npm test -- --testPathPatterns=functional.test.js
 
       - name: Run npm audit
         run: |
@@ -47,9 +50,9 @@ jobs:
       - name: Generate safe artifact name
         id: artifact-name
         run: |
-          # Extraire le dernier segment du chemin (nom du dossier du jeu)
+          # Extract the last segment of the path (name of the directory game)
           GAME_NAME=$(basename "${{ inputs.game-path }}")
-          # Remplacer les caractères problématiques (optionnel, ici juste pour l'exemple)
+          # Replace untrusty char 
           SAFE_NAME=$(echo "$GAME_NAME" | sed 's/[^a-zA-Z0-9-]/-/g')
           echo "safe_name=$SAFE_NAME" >> $GITHUB_OUTPUT
 
