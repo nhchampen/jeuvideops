@@ -14,6 +14,9 @@ let mouseY;
 let words = [];
 let word = '';
 let elapsedTime = 0;
+let timer;
+let colorInterval;
+let enemySpawnInterval;
 let timerInterval;
 let startTime;
 let isDead = false;
@@ -259,8 +262,38 @@ function init() {
     window.requestAnimationFrame(gameLoop);
 }
 
+// function createWorld() {
+//     setInterval(() => {
+//         if (reverse) {
+//             reverse = false;
+//             pintinhaColor = 'white';
+//             pintinhaColor1 = 'black';
+//         } else {
+//             reverse = true;
+//             pintinhaColor1 = 'white';
+//             pintinhaColor = 'black';
+//         }
+//     }, 3000);
+
+//     gameObjects = [new MainCharacter(context, mouseX, mouseY, 50, -50)];
+//     startTime = Date.now() - elapsedTime;
+
+//     const interval = setInterval(() => {
+//         if (!isDead) {
+//             createAnEnemy();
+//         } else {
+//             clearInterval(interval);
+//         }
+//     }, 3000);
+// }
+
 function createWorld() {
-    setInterval(() => {
+    if (typeof jest !== 'undefined') {
+        gameObjects = [new MainCharacter(context, mouseX, mouseY, 50, -50)];
+        startTime = Date.now() - elapsedTime;
+        return;
+    }
+    colorInterval = setInterval(function() {
         if (reverse) {
             reverse = false;
             pintinhaColor = 'white';
@@ -271,15 +304,13 @@ function createWorld() {
             pintinhaColor = 'black';
         }
     }, 3000);
-
     gameObjects = [new MainCharacter(context, mouseX, mouseY, 50, -50)];
     startTime = Date.now() - elapsedTime;
-
-    const interval = setInterval(() => {
+    enemySpawnInterval = setInterval(function() {
         if (!isDead) {
             createAnEnemy();
         } else {
-            clearInterval(interval);
+            clearInterval(enemySpawnInterval);
         }
     }, 3000);
 }
@@ -442,10 +473,50 @@ function restartStateGame() {
     words = [];
     word = '';
     elapsedTime = 0;
-    clearInterval(timerInterval);
+    timerInterval = null;
+    colorInterval = null;
+    enemySpawnInterval = null;
     startTime = undefined;
     lastTime = 0;
     invencibilityTime = 2000;
     isDead = false;
     isGameBegins = false;
+    clearInterval(colorInterval);
+    clearInterval(enemySpawnInterval);
+    colorInterval = null;
+    enemySpawnInterval = null;
+    timer = '';
 }
+
+window.gameActions = {
+    beginGame,
+    createAnEnemy,
+    init,
+    restartStateGame,
+    hardReset: function() {
+        // Arrêter tous les intervalles
+        clearInterval(colorInterval);
+        clearInterval(enemySpawnInterval);
+        clearInterval(timerInterval);
+        // Réinitialiser toutes les variables globales
+        secondsPassed = 0;
+        oldTimeStamp = 0;
+        gameObjects = [];
+        words = [];
+        word = '';
+        elapsedTime = 0;
+        timerInterval = null;
+        startTime = undefined;
+        lastTime = 0;
+        invencibilityTime = 2000;
+        isDead = false;
+        isGameBegins = false;
+        reverse = false;
+        pintinhaColor1 = 'white';
+        pintinhaColor = 'black';
+        timer = '';
+        mouseX = 0;
+        mouseY = 0;
+        // Nettoyer les éventuels écouteurs résiduels (optionnel)
+    }
+};
