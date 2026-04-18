@@ -37,10 +37,10 @@ jobs:
       # Placeholder for futurs steps
       # Changes echo with the real commands
       - name: Unit Tests
-        run: npm test -- --testPathPattern=utils.test.js
+        run: npm test -- --testPathPatterns=utils.test.js
 
       - name: Functionnal Tests
-        run: npm test -- --testPathPattern=functional.test.js
+        run: npm test -- --testPathPatterns=functional.test.js
 
       - name: Run npm audit
         run: |

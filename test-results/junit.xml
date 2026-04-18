@@ -1,113 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="18" failures="3" errors="0" time="2.126">
-  <testsuite name="SpaceWord Utilities" errors="0" failures="0" skipped="0" timestamp="2026-04-18T20:25:48" time="0.882" tests="15">
-    <testcase classname="SpaceWord Utilities getRandomInt returns an integer between the bounds" name="SpaceWord Utilities getRandomInt returns an integer between the bounds" time="0.005">
+<testsuites name="jest tests" tests="15" failures="0" errors="0" time="0.703">
+  <testsuite name="SpaceWord Utilities" errors="0" failures="0" skipped="0" timestamp="2026-04-18T20:28:09" time="0.344" tests="15">
+    <testcase classname="SpaceWord Utilities getRandomInt returns an integer between the bounds" name="SpaceWord Utilities getRandomInt returns an integer between the bounds" time="0.003">
     </testcase>
-    <testcase classname="SpaceWord Utilities getRandomInt equal bounds returns that value" name="SpaceWord Utilities getRandomInt equal bounds returns that value" time="0.001">
+    <testcase classname="SpaceWord Utilities getRandomInt equal bounds returns that value" name="SpaceWord Utilities getRandomInt equal bounds returns that value" time="0">
     </testcase>
-    <testcase classname="SpaceWord Utilities rectIntersect non-overlapping returns false" name="SpaceWord Utilities rectIntersect non-overlapping returns false" time="0.001">
+    <testcase classname="SpaceWord Utilities rectIntersect non-overlapping returns false" name="SpaceWord Utilities rectIntersect non-overlapping returns false" time="0">
     </testcase>
-    <testcase classname="SpaceWord Utilities rectIntersect overlapping returns true" name="SpaceWord Utilities rectIntersect overlapping returns true" time="0">
+    <testcase classname="SpaceWord Utilities rectIntersect overlapping returns true" name="SpaceWord Utilities rectIntersect overlapping returns true" time="0.001">
     </testcase>
-    <testcase classname="SpaceWord Utilities rectIntersect rectangles touching edges collide" name="SpaceWord Utilities rectIntersect rectangles touching edges collide" time="0.001">
+    <testcase classname="SpaceWord Utilities rectIntersect rectangles touching edges collide" name="SpaceWord Utilities rectIntersect rectangles touching edges collide" time="0">
     </testcase>
     <testcase classname="SpaceWord Utilities circleIntersect non-overlapping circles return false" name="SpaceWord Utilities circleIntersect non-overlapping circles return false" time="0">
     </testcase>
     <testcase classname="SpaceWord Utilities circleIntersect overlapping circles return true" name="SpaceWord Utilities circleIntersect overlapping circles return true" time="0">
     </testcase>
-    <testcase classname="SpaceWord Utilities circleIntersect tangent circles return true" name="SpaceWord Utilities circleIntersect tangent circles return true" time="0.001">
+    <testcase classname="SpaceWord Utilities circleIntersect tangent circles return true" name="SpaceWord Utilities circleIntersect tangent circles return true" time="0">
     </testcase>
     <testcase classname="SpaceWord Utilities timeToString 123456789 ms formats correctly (as per PDF expectation)" name="SpaceWord Utilities timeToString 123456789 ms formats correctly (as per PDF expectation)" time="0">
     </testcase>
-    <testcase classname="SpaceWord Utilities timeToString non-numeric input returns NaN string" name="SpaceWord Utilities timeToString non-numeric input returns NaN string" time="0.001">
+    <testcase classname="SpaceWord Utilities timeToString non-numeric input returns NaN string" name="SpaceWord Utilities timeToString non-numeric input returns NaN string" time="0">
     </testcase>
     <testcase classname="SpaceWord Utilities timeToString zero formats as 00:00:00" name="SpaceWord Utilities timeToString zero formats as 00:00:00" time="0">
     </testcase>
     <testcase classname="SpaceWord Utilities timeToString negative value formats with negative components" name="SpaceWord Utilities timeToString negative value formats with negative components" time="0">
     </testcase>
-    <testcase classname="SpaceWord Utilities generateString returns string of correct length" name="SpaceWord Utilities generateString returns string of correct length" time="0">
+    <testcase classname="SpaceWord Utilities generateString returns string of correct length" name="SpaceWord Utilities generateString returns string of correct length" time="0.001">
     </testcase>
-    <testcase classname="SpaceWord Utilities generateString contains only lowercase letters" name="SpaceWord Utilities generateString contains only lowercase letters" time="0.001">
+    <testcase classname="SpaceWord Utilities generateString contains only lowercase letters" name="SpaceWord Utilities generateString contains only lowercase letters" time="0">
     </testcase>
-    <testcase classname="SpaceWord Utilities getPosition calculates absolute position of an element" name="SpaceWord Utilities getPosition calculates absolute position of an element" time="0.011">
-    </testcase>
-  </testsuite>
-  <testsuite name="SpaceWord Functional Tests" errors="0" failures="3" skipped="0" timestamp="2026-04-18T20:25:48" time="1.025" tests="3">
-    <testcase classname="SpaceWord Functional Tests Game initializes correctly when started" name="SpaceWord Functional Tests Game initializes correctly when started" time="0.022">
-      <failure>TypeError: Cannot read properties of null (reading &apos;clearRect&apos;)
-    at clearRect (/home/champen/Documents/temp/jeuvideops/games/spaceword/script.js:431:13)
-    at clearCanvas (/home/champen/Documents/temp/jeuvideops/games/spaceword/script.js:377:13)
-    at cb (/home/champen/Documents/temp/jeuvideops/games/spaceword/__tests__/functional.test.js:51:13)
-    at /home/champen/Documents/temp/jeuvideops/node_modules/jest-mock/build/index.js:305:39
-    at /home/champen/Documents/temp/jeuvideops/node_modules/jest-mock/build/index.js:312:13
-    at mockConstructor (/home/champen/Documents/temp/jeuvideops/node_modules/jest-mock/build/index.js:102:19)
-    at requestAnimationFrame (/home/champen/Documents/temp/jeuvideops/games/spaceword/script.js:259:12)
-    at Object.init [as beginGame] (/home/champen/Documents/temp/jeuvideops/games/spaceword/script.js:412:5)
-    at Object.beginGame (/home/champen/Documents/temp/jeuvideops/games/spaceword/__tests__/functional.test.js:67:21)
-    at Promise.finally.completed (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:1557:28)
-    at new Promise (&lt;anonymous&gt;)
-    at callAsyncCircusFn (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:1497:10)
-    at _callCircusTest (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:1007:40)
-    at processTicksAndRejections (node:internal/process/task_queues:103:5)
-    at _runTest (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:947:3)
-    at /home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:849:7
-    at _runTestsForDescribeBlock (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:862:11)
-    at _runTestsForDescribeBlock (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:857:11)
-    at run (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:761:3)
-    at runAndTransformResultsToJestFormat (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:1918:21)
-    at jestAdapter (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/runner.js:101:19)
-    at runTestInternal (/home/champen/Documents/temp/jeuvideops/node_modules/jest-runner/build/testWorker.js:275:16)
-    at runTest (/home/champen/Documents/temp/jeuvideops/node_modules/jest-runner/build/testWorker.js:343:7)
-    at Object.worker (/home/champen/Documents/temp/jeuvideops/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
-    </testcase>
-    <testcase classname="SpaceWord Functional Tests Typing correct letter advances the word and removes enemy when word is complete" name="SpaceWord Functional Tests Typing correct letter advances the word and removes enemy when word is complete" time="0.005">
-      <failure>Error: expect(received).toBe(expected) // Object.is equality
-
-Expected: &quot;xuqhy&quot;
-Received: &quot;&quot;
-    at Object.toBe (/home/champen/Documents/temp/jeuvideops/games/spaceword/__tests__/functional.test.js:97:32)
-    at Promise.finally.completed (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:1557:28)
-    at new Promise (&lt;anonymous&gt;)
-    at callAsyncCircusFn (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:1497:10)
-    at _callCircusTest (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:1007:40)
-    at processTicksAndRejections (node:internal/process/task_queues:103:5)
-    at _runTest (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:947:3)
-    at /home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:849:7
-    at _runTestsForDescribeBlock (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:862:11)
-    at _runTestsForDescribeBlock (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:857:11)
-    at run (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:761:3)
-    at runAndTransformResultsToJestFormat (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:1918:21)
-    at jestAdapter (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/runner.js:101:19)
-    at runTestInternal (/home/champen/Documents/temp/jeuvideops/node_modules/jest-runner/build/testWorker.js:275:16)
-    at runTest (/home/champen/Documents/temp/jeuvideops/node_modules/jest-runner/build/testWorker.js:343:7)
-    at Object.worker (/home/champen/Documents/temp/jeuvideops/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
-    </testcase>
-    <testcase classname="SpaceWord Functional Tests Collision with enemy decreases lives and triggers game over after 3 collisions" name="SpaceWord Functional Tests Collision with enemy decreases lives and triggers game over after 3 collisions" time="0.003">
-      <failure>TypeError: Cannot read properties of null (reading &apos;clearRect&apos;)
-    at clearRect (/home/champen/Documents/temp/jeuvideops/games/spaceword/script.js:431:13)
-    at clearCanvas (/home/champen/Documents/temp/jeuvideops/games/spaceword/script.js:377:13)
-    at cb (/home/champen/Documents/temp/jeuvideops/games/spaceword/__tests__/functional.test.js:51:13)
-    at /home/champen/Documents/temp/jeuvideops/node_modules/jest-mock/build/index.js:305:39
-    at /home/champen/Documents/temp/jeuvideops/node_modules/jest-mock/build/index.js:312:13
-    at mockConstructor (/home/champen/Documents/temp/jeuvideops/node_modules/jest-mock/build/index.js:102:19)
-    at requestAnimationFrame (/home/champen/Documents/temp/jeuvideops/games/spaceword/script.js:259:12)
-    at Object.init [as beginGame] (/home/champen/Documents/temp/jeuvideops/games/spaceword/script.js:412:5)
-    at Object.beginGame (/home/champen/Documents/temp/jeuvideops/games/spaceword/__tests__/functional.test.js:109:21)
-    at Promise.finally.completed (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:1557:28)
-    at new Promise (&lt;anonymous&gt;)
-    at callAsyncCircusFn (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:1497:10)
-    at _callCircusTest (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:1007:40)
-    at processTicksAndRejections (node:internal/process/task_queues:103:5)
-    at _runTest (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:947:3)
-    at /home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:849:7
-    at _runTestsForDescribeBlock (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:862:11)
-    at _runTestsForDescribeBlock (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:857:11)
-    at run (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:761:3)
-    at runAndTransformResultsToJestFormat (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/jestAdapterInit.js:1918:21)
-    at jestAdapter (/home/champen/Documents/temp/jeuvideops/node_modules/jest-circus/build/runner.js:101:19)
-    at runTestInternal (/home/champen/Documents/temp/jeuvideops/node_modules/jest-runner/build/testWorker.js:275:16)
-    at runTest (/home/champen/Documents/temp/jeuvideops/node_modules/jest-runner/build/testWorker.js:343:7)
-    at Object.worker (/home/champen/Documents/temp/jeuvideops/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    <testcase classname="SpaceWord Utilities getPosition calculates absolute position of an element" name="SpaceWord Utilities getPosition calculates absolute position of an element" time="0.009">
     </testcase>
   </testsuite>
 </testsuites>
