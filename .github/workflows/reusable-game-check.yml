@@ -11,72 +11,53 @@ jobs:
   lint-test-audit:
     runs-on: ubuntu-latest
     steps:
+      # Step 1 : Get source code
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Step 2 : Check for the package-lock.json
       - name: Check for package-lock.json
         id: check_lock
         run: |
           if [ -f "${{ inputs.game-path }}/package-lock.json" ]; then
             echo "has_lock=true" >> $GITHUB_OUTPUT
-          else
-            echo "has_lock=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Setup Node.js (with cache)
-        if: steps.check_lock.outputs.has_lock == 'true'
+      # Step 3 : Install Node.js (with cache if allowed)
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
+          cache: ${{ steps.check_lock.outputs.has_lock == 'true' && 'npm' || '' }}
           cache-dependency-path: ${{ inputs.game-path }}/package-lock.json
 
-      - name: Setup Node.js (without cache)
-        if: steps.check_lock.outputs.has_lock == 'false'
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install root dependencies
+      # Step 4 : Install dependencies (if package.json available)
+      - name: Install dependencies
         run: |
           if [ -f "package.json" ]; then
-            if [ -f "package-lock.json" ]; then
-              npm ci
-            else
-              npm install
-            fi
-          fi
-
-      - name: Install game dependencies
-        working-directory: ${{ inputs.game-path }}
-        run: |
-          if [ -f "package.json" ]; then
-            if [ -f "package-lock.json" ]; then
-              npm ci
-            else
-              npm install
-            fi
+            echo "Installing dependencies..."
+            npm install
+          else
+            echo "No package.json found, skipping npm install"
           fi
 
       - name: Unit Tests
-        run: npx jest --projects ${{ inputs.game-path }} --testPathPattern="utils.test.js" --ci
+        run: npm test -- --testPathPatterns=utils.test.js
 
-      - name: Functional Tests
-        run: npx jest --projects ${{ inputs.game-path }} --testPathPattern="functional.test.js" --ci
+      - name: Functionnal Tests
+        run: npm test -- --testPathPatterns=functional.test.js
 
       - name: Run npm audit
-        working-directory: ${{ inputs.game-path }}
         run: |
-          if [ -f "package.json" ]; then
-            npm audit --json > audit-report.json || true
-          else
-            echo "{}" > audit-report.json
-          fi
+          cd ${{ inputs.game-path }}
+          npm audit --json > audit-report.json || true
 
       - name: Generate safe artifact name
         id: artifact-name
         run: |
+          # Extract the last segment of the path (name of the directory game)
           GAME_NAME=$(basename "${{ inputs.game-path }}")
+          # Replace untrusty char 
           SAFE_NAME=$(echo "$GAME_NAME" | sed 's/[^a-zA-Z0-9-]/-/g')
           echo "safe_name=$SAFE_NAME" >> $GITHUB_OUTPUT
 

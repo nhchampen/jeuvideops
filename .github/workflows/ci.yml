@@ -9,10 +9,9 @@ on:
 permissions:
   contents: read
   security-events: write
-  checks: write
-  pull-requests: write
 
 jobs:
+  # 1. Secret scanning (always)
   gitleaks:
     name: Secret Scan
     runs-on: ubuntu-latest
@@ -25,9 +24,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  # 2. Lint root code (ESLint)
   lint:
     name: Lint Code
     runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -38,7 +41,7 @@ jobs:
         id: lint
         continue-on-error: true
         run: npx eslint . --format json --output-file eslint_report.json
-      - name: Annotate Results (PR only)
+      - name: Annotate Results
         if: github.event_name == 'pull_request'
         uses: ataylorme/eslint-annotate-action@v3
         with:
@@ -48,6 +51,7 @@ jobs:
         if: steps.lint.outcome != 'success'
         run: exit 1
 
+  # 3. Security audit (root dependencies)
   audit:
     name: Security Audit
     runs-on: ubuntu-latest
@@ -70,12 +74,14 @@ jobs:
           FAIL_ON_SEVERITY: ${{ vars.FAIL_ON_SEVERITY || 'high' }}
         run: node scripts/check-audit.js
 
+  # 4. Test game 1
   test-spaceword:
     name: Test SpaceWord
     uses: ./.github/workflows/reusable-game-check.yml
     with:
       game-path: games/spaceword
 
+  # 5. Test game 2
   test-two-ships:
     name: Test Two Ships
     uses: ./.github/workflows/reusable-game-check.yml
