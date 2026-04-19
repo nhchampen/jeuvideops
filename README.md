@@ -10,7 +10,7 @@ A complete **CI/CD pipeline** for two retro JavaScript games, built with **GitHu
 
 ## 📖 Overview
 
-This project is part of an enterprise initiative to improve the competitiveness and reliability of a retro game studio. It implements a modern DevOps pipeline that:
+This project is part of a School project to improve the competitiveness and reliability of a retro game studio. It implements a modern DevOps pipeline that:
 
 - Automates testing (unit + functional) and linting
 - Scans for secrets and vulnerable dependencies
