@@ -82,12 +82,23 @@ jobs:
     needs: deploy-pages
     runs-on: ubuntu-latest
     steps:
-      - name: Wait for deployment to propagate
+      - name: Wait for deployment propagation
         run: sleep 15
+
+      - name: Determine URL
+        id: url
+        run: |
+          if [ -n "${{ needs.deploy-pages.outputs.page_url }}" ]; then
+            echo "url=${{ needs.deploy-pages.outputs.page_url }}" >> $GITHUB_OUTPUT
+          else
+            REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
+            OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+            echo "url=https://${OWNER}.github.io/${REPO_NAME}" >> $GITHUB_OUTPUT
+          fi
 
       - name: Verify deployment
         env:
-          URL: ${{ needs.deploy-pages.outputs.page_url }}
+          URL: ${{ steps.url.outputs.url }}
         run: |
           echo "Testing $URL"
           HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
@@ -95,8 +106,7 @@ jobs:
             echo "❌ HTTP status $HTTP_CODE, expected 200"
             exit 1
           fi
-          # Check that the page contains expected content (e.g., a title)
-          if ! curl -s "$URL" | grep -q "<title>Retro Games"; then
+          if ! curl -s "$URL" | grep -q "JEUVIDEOPS"; then
             echo "❌ Expected content not found"
             exit 1
           fi
