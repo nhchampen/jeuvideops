@@ -1,22 +1,87 @@
-name: Continuous Integration Orchestrator
+name: CI
 
 on:
   push:
-  pull_request: 
+  pull_request:
     branches: [ main, master ]
   workflow_dispatch:
 
-jobs: 
-  # Job 1 : Test for the game Two Ships
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  # 1. Secret scanning (always)
+  gitleaks:
+    name: Secret Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # 2. Lint root code (ESLint)
+  lint:
+    name: Lint Code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - name: Run ESLint
+        id: lint
+        continue-on-error: true
+        run: npx eslint . --format json --output-file eslint_report.json
+      - name: Annotate Results
+        uses: ataylorme/eslint-annotate-action@v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          report-json: "eslint_report.json"
+      - name: Fail on lint errors
+        run: |
+          if [ ${{ steps.lint.outcome }} != 'success' ]; then
+            exit 1
+          fi
+
+  # 3. Security audit (root dependencies)
+  audit:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - name: Run npm audit
+        run: npm audit --json > audit-report.json || true
+      - name: Upload audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: npm-audit-report-root
+          path: audit-report.json
+          retention-days: 7
+      - name: Check severity thresholds
+        env:
+          FAIL_ON_SEVERITY: ${{ vars.FAIL_ON_SEVERITY || 'high' }}
+        run: node scripts/check-audit.js
+
+  # 4. Test game 1
+  test-spaceword:
+    name: Test SpaceWord
+    uses: ./.github/workflows/reusable-game-check.yml
+    with:
+      game-path: games/spaceword
+
+  # 5. Test game 2
   test-two-ships:
     name: Test Two Ships
     uses: ./.github/workflows/reusable-game-check.yml
     with:
       game-path: games/two-ships-passing-in-the-night
-
-  # Job 2 : Test for the game space word
-  test-space-word:
-    name: Test Space word
-    uses: ./.github/workflows/reusable-game-check.yml
-    with:
-      game-path: games/spaceword
