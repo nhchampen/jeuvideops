@@ -137,7 +137,7 @@ Security: Gitleaks, npm audit
 Deployment: GitHub Pages, GHCR
 
 ## 👥 Authors
-Nohan and Tomas
+[Nohan](https://github.com/nhchampen) and [Tomas](https://github.com/tomasilva14)
 
 Original games by participants of the js13kGames 2021 competition.
 
