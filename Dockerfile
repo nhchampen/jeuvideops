@@ -1,10 +1,10 @@
 # Use lightweight Nginx alpine image
 FROM nginx:alpine
 
-# Copy the main landing page (index.html) and any root assets
+# Remove default Nginx static files
 RUN rm -rf /usr/share/nginx/html/*
 
-# If youy have add
+# Copy the main landing page (index.html) and any root assets
 COPY index.html /usr/share/nginx/html/
 
 # Copy additional root assets CSS, JS...
