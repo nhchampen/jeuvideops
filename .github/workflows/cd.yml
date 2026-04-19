@@ -71,3 +71,29 @@ jobs:
           path: '_site'
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # 3. Smoke test to test the status of the app
+  smoke-test:
+    name: Smoke Test
+    needs: deploy-pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for deployment to propagate
+        run: sleep 15
+
+      - name: Verify deployment
+        env:
+          URL: ${{ needs.deploy-pages.outputs.page_url }}
+        run: |
+          echo "Testing $URL"
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
+          if [ "$HTTP_CODE" -ne 200 ]; then
+            echo "❌ HTTP status $HTTP_CODE, expected 200"
+            exit 1
+          fi
+          # Check that the page contains expected content (e.g., a title)
+          if ! curl -s "$URL" | grep -q "<title>Retro Games"; then
+            echo "❌ Expected content not found"
+            exit 1
+          fi
+          echo "✅ Smoke test passed"

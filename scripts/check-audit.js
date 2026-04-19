@@ -14,7 +14,7 @@ const severityScore = {
   low: 1,
   moderate: 2,
   high: 3,
-  critical: 4
+  critical: 4,
 };
 
 const threshold = process.env.FAIL_ON_SEVERITY || 'high';
