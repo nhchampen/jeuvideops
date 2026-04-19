@@ -1,7 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="30" failures="0" errors="0" time="0.81">
-  <testsuite name="Two Ships - Functional Tests" errors="0" failures="0" skipped="0" timestamp="2026-04-18T21:55:22" time="0.238" tests="9">
-    <testcase classname="Two Ships - Functional Tests Game Math Functions randFloatSpread returns number within range" name="Two Ships - Functional Tests Game Math Functions randFloatSpread returns number within range" time="0.001">
+<testsuites name="jest tests" tests="30" failures="0" errors="0" time="2.037">
+  <testsuite name="Two Ships Passing In The Night - Math Functions" errors="0" failures="0" skipped="0" timestamp="2026-04-19T19:50:08" time="0.684" tests="3">
+    <testcase classname="Two Ships Passing In The Night - Math Functions randFloatSpread(1) returns a value between -1 and 1" name="Two Ships Passing In The Night - Math Functions randFloatSpread(1) returns a value between -1 and 1" time="0.006">
+    </testcase>
+    <testcase classname="Two Ships Passing In The Night - Math Functions maplinear function exists and does not throw" name="Two Ships Passing In The Night - Math Functions maplinear function exists and does not throw" time="0.001">
+    </testcase>
+    <testcase classname="Two Ships Passing In The Night - Math Functions lerp function works" name="Two Ships Passing In The Night - Math Functions lerp function works" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="SpaceWord Utilities" errors="0" failures="0" skipped="0" timestamp="2026-04-19T19:50:08" time="0.871" tests="15">
+    <testcase classname="SpaceWord Utilities getRandomInt returns an integer between the bounds" name="SpaceWord Utilities getRandomInt returns an integer between the bounds" time="0.008">
+    </testcase>
+    <testcase classname="SpaceWord Utilities getRandomInt equal bounds returns that value" name="SpaceWord Utilities getRandomInt equal bounds returns that value" time="0.001">
+    </testcase>
+    <testcase classname="SpaceWord Utilities rectIntersect non-overlapping returns false" name="SpaceWord Utilities rectIntersect non-overlapping returns false" time="0">
+    </testcase>
+    <testcase classname="SpaceWord Utilities rectIntersect overlapping returns true" name="SpaceWord Utilities rectIntersect overlapping returns true" time="0">
+    </testcase>
+    <testcase classname="SpaceWord Utilities rectIntersect rectangles touching edges collide" name="SpaceWord Utilities rectIntersect rectangles touching edges collide" time="0.001">
+    </testcase>
+    <testcase classname="SpaceWord Utilities circleIntersect non-overlapping circles return false" name="SpaceWord Utilities circleIntersect non-overlapping circles return false" time="0.001">
+    </testcase>
+    <testcase classname="SpaceWord Utilities circleIntersect overlapping circles return true" name="SpaceWord Utilities circleIntersect overlapping circles return true" time="0">
+    </testcase>
+    <testcase classname="SpaceWord Utilities circleIntersect tangent circles return true" name="SpaceWord Utilities circleIntersect tangent circles return true" time="0.001">
+    </testcase>
+    <testcase classname="SpaceWord Utilities timeToString 123456789 ms formats correctly (as per PDF expectation)" name="SpaceWord Utilities timeToString 123456789 ms formats correctly (as per PDF expectation)" time="0.001">
+    </testcase>
+    <testcase classname="SpaceWord Utilities timeToString non-numeric input returns NaN string" name="SpaceWord Utilities timeToString non-numeric input returns NaN string" time="0">
+    </testcase>
+    <testcase classname="SpaceWord Utilities timeToString zero formats as 00:00:00" name="SpaceWord Utilities timeToString zero formats as 00:00:00" time="0.001">
+    </testcase>
+    <testcase classname="SpaceWord Utilities timeToString negative value formats with negative components" name="SpaceWord Utilities timeToString negative value formats with negative components" time="0">
+    </testcase>
+    <testcase classname="SpaceWord Utilities generateString returns string of correct length" name="SpaceWord Utilities generateString returns string of correct length" time="0">
+    </testcase>
+    <testcase classname="SpaceWord Utilities generateString contains only lowercase letters" name="SpaceWord Utilities generateString contains only lowercase letters" time="0.001">
+    </testcase>
+    <testcase classname="SpaceWord Utilities getPosition calculates absolute position of an element" name="SpaceWord Utilities getPosition calculates absolute position of an element" time="0.015">
+    </testcase>
+  </testsuite>
+  <testsuite name="Two Ships - Functional Tests" errors="0" failures="0" skipped="0" timestamp="2026-04-19T19:50:08" time="1.035" tests="9">
+    <testcase classname="Two Ships - Functional Tests Game Math Functions randFloatSpread returns number within range" name="Two Ships - Functional Tests Game Math Functions randFloatSpread returns number within range" time="0.004">
     </testcase>
     <testcase classname="Two Ships - Functional Tests Game Math Functions maplinear / mapLinear function exists and works" name="Two Ships - Functional Tests Game Math Functions maplinear / mapLinear function exists and works" time="0.001">
     </testcase>
@@ -9,7 +49,7 @@
     </testcase>
     <testcase classname="Two Ships - Functional Tests Physics System Physics bodies system exists" name="Two Ships - Functional Tests Physics System Physics bodies system exists" time="0.001">
     </testcase>
-    <testcase classname="Two Ships - Functional Tests Physics System Body types are defined correctly" name="Two Ships - Functional Tests Physics System Body types are defined correctly" time="0">
+    <testcase classname="Two Ships - Functional Tests Physics System Body types are defined correctly" name="Two Ships - Functional Tests Physics System Body types are defined correctly" time="0.011">
     </testcase>
     <testcase classname="Two Ships - Functional Tests Physics System Swept AABB collision exists" name="Two Ships - Functional Tests Physics System Swept AABB collision exists" time="0.001">
     </testcase>
@@ -20,52 +60,12 @@
     <testcase classname="Two Ships - Functional Tests Collision Detection Box creation works" name="Two Ships - Functional Tests Collision Detection Box creation works" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="SpaceWord Functional Tests" errors="0" failures="0" skipped="0" timestamp="2026-04-18T21:55:22" time="0.211" tests="3">
-    <testcase classname="SpaceWord Functional Tests Game starts without crashing and creates main character" name="SpaceWord Functional Tests Game starts without crashing and creates main character" time="0.07">
+  <testsuite name="SpaceWord Functional Tests" errors="0" failures="0" skipped="0" timestamp="2026-04-19T19:50:08" time="1.201" tests="3">
+    <testcase classname="SpaceWord Functional Tests Game starts without crashing and creates main character" name="SpaceWord Functional Tests Game starts without crashing and creates main character" time="0.169">
     </testcase>
-    <testcase classname="SpaceWord Functional Tests Enemy can be created and typing mechanic works" name="SpaceWord Functional Tests Enemy can be created and typing mechanic works" time="0.045">
+    <testcase classname="SpaceWord Functional Tests Enemy can be created and typing mechanic works" name="SpaceWord Functional Tests Enemy can be created and typing mechanic works" time="0.07">
     </testcase>
-    <testcase classname="SpaceWord Functional Tests Collision functions do not throw errors" name="SpaceWord Functional Tests Collision functions do not throw errors" time="0.071">
-    </testcase>
-  </testsuite>
-  <testsuite name="SpaceWord Utilities" errors="0" failures="0" skipped="0" timestamp="2026-04-18T21:55:22" time="0.025" tests="15">
-    <testcase classname="SpaceWord Utilities getRandomInt returns an integer between the bounds" name="SpaceWord Utilities getRandomInt returns an integer between the bounds" time="0">
-    </testcase>
-    <testcase classname="SpaceWord Utilities getRandomInt equal bounds returns that value" name="SpaceWord Utilities getRandomInt equal bounds returns that value" time="0">
-    </testcase>
-    <testcase classname="SpaceWord Utilities rectIntersect non-overlapping returns false" name="SpaceWord Utilities rectIntersect non-overlapping returns false" time="0">
-    </testcase>
-    <testcase classname="SpaceWord Utilities rectIntersect overlapping returns true" name="SpaceWord Utilities rectIntersect overlapping returns true" time="0">
-    </testcase>
-    <testcase classname="SpaceWord Utilities rectIntersect rectangles touching edges collide" name="SpaceWord Utilities rectIntersect rectangles touching edges collide" time="0.001">
-    </testcase>
-    <testcase classname="SpaceWord Utilities circleIntersect non-overlapping circles return false" name="SpaceWord Utilities circleIntersect non-overlapping circles return false" time="0">
-    </testcase>
-    <testcase classname="SpaceWord Utilities circleIntersect overlapping circles return true" name="SpaceWord Utilities circleIntersect overlapping circles return true" time="0">
-    </testcase>
-    <testcase classname="SpaceWord Utilities circleIntersect tangent circles return true" name="SpaceWord Utilities circleIntersect tangent circles return true" time="0">
-    </testcase>
-    <testcase classname="SpaceWord Utilities timeToString 123456789 ms formats correctly (as per PDF expectation)" name="SpaceWord Utilities timeToString 123456789 ms formats correctly (as per PDF expectation)" time="0.001">
-    </testcase>
-    <testcase classname="SpaceWord Utilities timeToString non-numeric input returns NaN string" name="SpaceWord Utilities timeToString non-numeric input returns NaN string" time="0">
-    </testcase>
-    <testcase classname="SpaceWord Utilities timeToString zero formats as 00:00:00" name="SpaceWord Utilities timeToString zero formats as 00:00:00" time="0">
-    </testcase>
-    <testcase classname="SpaceWord Utilities timeToString negative value formats with negative components" name="SpaceWord Utilities timeToString negative value formats with negative components" time="0.001">
-    </testcase>
-    <testcase classname="SpaceWord Utilities generateString returns string of correct length" name="SpaceWord Utilities generateString returns string of correct length" time="0">
-    </testcase>
-    <testcase classname="SpaceWord Utilities generateString contains only lowercase letters" name="SpaceWord Utilities generateString contains only lowercase letters" time="0">
-    </testcase>
-    <testcase classname="SpaceWord Utilities getPosition calculates absolute position of an element" name="SpaceWord Utilities getPosition calculates absolute position of an element" time="0.002">
-    </testcase>
-  </testsuite>
-  <testsuite name="Two Ships Passing In The Night - Math Functions" errors="0" failures="0" skipped="0" timestamp="2026-04-18T21:55:22" time="0.018" tests="3">
-    <testcase classname="Two Ships Passing In The Night - Math Functions randFloatSpread(1) returns a value between -1 and 1" name="Two Ships Passing In The Night - Math Functions randFloatSpread(1) returns a value between -1 and 1" time="0.001">
-    </testcase>
-    <testcase classname="Two Ships Passing In The Night - Math Functions maplinear function exists and does not throw" name="Two Ships Passing In The Night - Math Functions maplinear function exists and does not throw" time="0">
-    </testcase>
-    <testcase classname="Two Ships Passing In The Night - Math Functions lerp function works" name="Two Ships Passing In The Night - Math Functions lerp function works" time="0.001">
+    <testcase classname="SpaceWord Functional Tests Collision functions do not throw errors" name="SpaceWord Functional Tests Collision functions do not throw errors" time="0.096">
     </testcase>
   </testsuite>
 </testsuites>
