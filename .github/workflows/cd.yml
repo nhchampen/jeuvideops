@@ -58,6 +58,8 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v4
@@ -71,6 +73,8 @@ jobs:
           path: '_site'
       - id: deployment
         uses: actions/deploy-pages@v4
+      - name: Debug page URL
+        run: echo "Page URL is ${{ steps.deployment.outputs.page_url }}"
 
   # 3. Smoke test to test the status of the app
   smoke-test:
